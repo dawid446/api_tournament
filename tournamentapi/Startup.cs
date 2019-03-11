@@ -11,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using tournamentapi.Controllers;
 using tournamentapi.Interfaces;
 using tournamentapi.Models;
 
@@ -41,6 +42,8 @@ namespace tournamentapi
             });
             services.AddTransient<ITournamentRepository, TournamentRepository>();
             services.AddTransient<IMatchesRepository, MatchesRepository>();
+            services.AddTransient<ITournamentAlgorithm, TournamentAlgorithm>();
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             
             var connection = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=react_tournament;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";

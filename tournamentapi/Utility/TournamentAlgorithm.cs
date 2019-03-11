@@ -8,8 +8,11 @@ using static tournamentapi.Controllers.TournamentsController;
 
 namespace tournamentapi.Controllers
 {
-    
-    public class TournamentAlgorithm
+    public interface ITournamentAlgorithm
+    {
+        void ListMatches(List<Team> ListTeam,int tournamentID);
+    }
+    public class TournamentAlgorithm : ITournamentAlgorithm
     {
         private IMatchesRepository _MatchesRepo;
 

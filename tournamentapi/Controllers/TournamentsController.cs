@@ -19,11 +19,12 @@ namespace tournamentapi.Controllers
         
         private ITournamentRepository _TournamentRepo;
         private IMatchesRepository _MatchesRepo;
-
-        public TournamentsController(ITournamentRepository TournamentRepo, IMatchesRepository MatchesRepo)
+        private ITournamentAlgorithm _tournamentAlgorithm;
+        public TournamentsController(ITournamentRepository TournamentRepo, IMatchesRepository MatchesRepo, ITournamentAlgorithm tournamentAlgorithm)
         {
             _TournamentRepo = TournamentRepo;
             _MatchesRepo = MatchesRepo;
+            _tournamentAlgorithm = tournamentAlgorithm;
         }
 
         [HttpGet]
@@ -67,8 +68,8 @@ namespace tournamentapi.Controllers
             _TournamentRepo.Save();
 
             value.RemoveAt(value.Count - 1);
-            TournamentAlgorithm tournamentAlgorithm = new TournamentAlgorithm(_MatchesRepo);
-            tournamentAlgorithm.ListMatches(value, tournament.TournamentID);
+            _tournamentAlgorithm.ListMatches(value, tournament.TournamentID);
+           
 
             return Ok(tournament);
         }
